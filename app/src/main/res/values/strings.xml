@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">food</string>
+    <string name="guest_login_text"><u>continuer comme invité</u></string>
 </resources>
