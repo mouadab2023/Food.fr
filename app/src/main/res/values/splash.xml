@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Food.MySplash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#FFFF</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/food</item>
+        <item name="postSplashScreenTheme">@style/Theme.Material3.DayNight.NoActionBar</item>
+    </style>
+</resources>
