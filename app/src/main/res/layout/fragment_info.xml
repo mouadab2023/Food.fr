@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Restaurant Name -->
+    <TextView
+        android:id="@+id/restaurantNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restaurant Name"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:maxLines="2"
+        android:ellipsize="end" />
+
+    <!-- Rating & Review Count -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical">
+
+        <!-- Star Icon -->
+        <ImageView
+            android:id="@+id/starIcon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/star" />
+
+        <!-- Rating -->
+        <TextView
+            android:id="@+id/ratingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="4dp" />
+
+        <!-- Review Count -->
+        <TextView
+            android:id="@+id/reviewCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(0)"
+            android:textSize="14sp"
+            android:textColor="@color/gray"
+            android:layout_marginStart="4dp" />
+    </LinearLayout>
+
+    <!-- Restaurant Description -->
+    <TextView
+        android:id="@+id/descriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Description du restaurant"
+        android:textSize="16sp"
+        android:lineSpacingExtra="4dp"
+        android:textColor="@color/white"
+        android:layout_marginTop="8dp"
+        android:maxLines="5"
+        android:ellipsize="end" />
+
+    <!-- Space between description and address -->
+    <TextView
+        android:id="@+id/adresseRestaurant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Adresse"
+        android:layout_marginTop="12dp" /> <!-- Added margin to create space -->
+</LinearLayout>

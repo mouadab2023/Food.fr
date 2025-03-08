@@ -1,29 +1,42 @@
 package utils;
 
 
+import android.widget.ImageView;
+
+import com.example.food.R;
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import model.api.response.PlaceResponse;
 
 public class Utils {
     public static double haversine(double lat1, double lon1, double lat2, double lon2) {
-        final int R = 6371; // Earth radius in kilometers
+        final int R = 6371;
         double latDistance = Math.toRadians(lat2 - lat1);
         double lonDistance = Math.toRadians(lon2 - lon1);
         double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2) +
                 Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
                         Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return R * c; // Distance in kilometers
+        return R * c;
     }
     public static String getPhoto(List<PlaceResponse.Place.Photo> photoList,String name){
-        for (PlaceResponse.Place.Photo p :photoList) {
-            for(PlaceResponse.Place.Photo.AuthorAttribution authorAttribution:p.getAuthorAttributions()){
+        for (final var p :photoList) {
+            for(final var authorAttribution:p.getAuthorAttributions()){
                 if(authorAttribution.getDisplayName().equals(name)){
                     return authorAttribution.getPhotoUri();
                 }
             }
         }
         return "";
+    }
+
+    public static void loadImage(ImageView imageView, String photoUrl) {
+        if (!photoUrl.isEmpty()) {
+            Picasso.get().load(photoUrl).resize(200, 100).into(imageView);
+        } else {
+            Picasso.get().load(R.drawable.poke_bowl).into(imageView);
+        }
     }
 }

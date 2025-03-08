@@ -19,7 +19,7 @@ import model.NearbyRestaurantFetcher;
 public class MainActivity extends AppCompatActivity {
     Button button;
     private final View.OnClickListener listner= view -> {
-        Intent intent=new Intent(MainActivity.this,RestaurantListActivity.class);
+        final var intent=new Intent(MainActivity.this,RestaurantListActivity.class);
         startActivity(intent);
     };
     @Override
@@ -31,6 +31,4 @@ public class MainActivity extends AppCompatActivity {
         button=findViewById(R.id.loginButton);
         button.setOnClickListener(listner);
     }
-
-
 }
