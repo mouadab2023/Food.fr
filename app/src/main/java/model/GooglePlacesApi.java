@@ -6,10 +6,12 @@ import retrofit2.http.Body;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 public interface GooglePlacesApi {
+
+    //TODO remove api key from repo before making project public
     @Headers({
             "Content-Type: application/json",
-           "X-Goog-Api-Key:" + "AIzaSyCI-HGW84mUIVgRJaA_MqqzwGOsesMyPsA",
-            "X-Goog-FieldMask: places.displayName,places.businessStatus,places.formattedAddress,places.photos,places.nationalPhoneNumber,places.rating,places.primaryType,places.location"
+            "X-Goog-Api-Key: AIzaSyCI-HGW84mUIVgRJaA_MqqzwGOsesMyPsA",
+            "X-Goog-FieldMask: places.displayName,places.businessStatus,places.formattedAddress,places.photos,places.nationalPhoneNumber,places.rating,places.primaryType,places.location,places.editorialSummary"
     })
     @POST("v1/places:searchNearby")
     Call<PlaceResponse> searchNearbyPlaces(@Body NearbySearchRequest request);
