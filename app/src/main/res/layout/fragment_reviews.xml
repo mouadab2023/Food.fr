@@ -1,14 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/AvisTextView"
-        android:layout_width="wrap_content"
+    <!-- ✅ Make sure this button exists! -->
+    <Button
+        android:id="@+id/addReviewButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Avis des clients"
+        android:text="Add a Review"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:textColor="@android:color/white"
+        android:padding="12dp"
         android:textSize="18sp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reviewsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>
