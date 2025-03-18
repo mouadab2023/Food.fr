@@ -2,4 +2,6 @@
     <string name="app_name">food</string>
     <string name="guest_login_text"><u>continuer comme invité</u></string>
     <string name="no_description_available">No description available</string>
+    <string name="default_notification_channel_id">default_channel</string>
+
 </resources>
