@@ -1,0 +1,53 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/reviewUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your name"
+        android:textSize="16sp"
+        android:padding="8dp"/>
+
+    <EditText
+        android:id="@+id/reviewDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Write your review"
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:minHeight="100dp"
+        android:gravity="top"
+        android:inputType="textMultiLine"/>
+
+    <RatingBar
+        android:id="@+id/reviewRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="0.5"
+        android:rating="3"
+        android:isIndicator="false"/>
+
+    <ImageView
+        android:id="@+id/reviewImageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:visibility="gone"
+        android:scaleType="centerCrop"/>
+
+    <Button
+        android:id="@+id/captureImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Take a Picture"/>
+
+    <Button
+        android:id="@+id/submitReview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit Review"/>
+</LinearLayout>
