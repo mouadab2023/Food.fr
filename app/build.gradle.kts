@@ -1,10 +1,6 @@
-
-
-
-
-
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -36,7 +32,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -47,7 +42,12 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.picasso)
     implementation(libs.play.services.location)
+    implementation(libs.firebase.firestore)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation("com.google.firebase:firebase-firestore:24.7.1")
+    implementation("com.google.firebase:firebase-storage:20.2.1")
 }
