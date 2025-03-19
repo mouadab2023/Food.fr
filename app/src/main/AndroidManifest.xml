@@ -61,6 +61,7 @@
 
         <activity android:name=".RestaurantDetailsActivity" />
         <activity android:name=".AddReviewActivity" />
+        <activity android:name=".ReservationActivity"/>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
