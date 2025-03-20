@@ -8,7 +8,6 @@ public class Avis {
     private String restaurant;
 
     public Avis() {
-        // Empty constructor for Firestore
     }
 
     public Avis(String username, String description, String picture, int note, String restaurant) {
