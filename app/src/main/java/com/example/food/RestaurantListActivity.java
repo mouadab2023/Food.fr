@@ -19,6 +19,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.Comparator;
 import java.util.List;
 
 import adapter.PlaceAdapter;
@@ -27,6 +28,7 @@ import model.api.response.PlaceResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import utils.Utils;
 
 public class RestaurantListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -113,6 +115,7 @@ public class RestaurantListActivity extends AppCompatActivity {
                         if (response.isSuccessful() && response.body() != null && response.body().getPlaces() != null) {
                             List<PlaceResponse.Place> places = response.body().getPlaces();
                             if (!places.isEmpty()) {
+                                places.sort(Comparator.comparingDouble(RestaurantListActivity.this::calculateDistance));
                                 PlaceAdapter placeAdapter = new PlaceAdapter(RestaurantListActivity.this, places);
                                 recyclerView.setAdapter(placeAdapter);
                             } else {
@@ -123,5 +126,14 @@ public class RestaurantListActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private double calculateDistance(PlaceResponse.Place place) {
+        return Utils.haversine(
+                coordinates.getLatitude(),
+                coordinates.getLongitude(),
+                place.getLocation().getLatitude(),
+                place.getLocation().getLongitude()
+        );
     }
 }

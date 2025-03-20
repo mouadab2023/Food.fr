@@ -47,17 +47,12 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.PlaceViewHol
         holder.typeText.setText(place.getPrimaryType().replace('_', ' '));
         holder.distanceText.setText(calculateDistance(place));
 
-        // Extract the photo name from the API response
         final var photoName = place.getPhotos() != null && !place.getPhotos().isEmpty()
                 ? place.getPhotos().get(0).getName()
                 : null;
 
-        // Get High-Quality Photo URL
         final var photoUrl = Utils.getPhoto(photoName);
-
-        // Load Image with Glide (better quality than Picasso)
         Utils.loadImage(holder.imageView, photoUrl);
-
         holder.itemView.setOnClickListener(v -> openRestaurantDetails(v, place, photoUrl));
     }
 
