@@ -80,9 +80,7 @@ public class RestaurantListActivity extends AppCompatActivity {
                 coordinates = location;
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
-                Toast.makeText(RestaurantListActivity.this, "Lat: " + latitude + ", Lon: " + longitude, Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(RestaurantListActivity.this, "Location not available, using default coordinates.", Toast.LENGTH_SHORT).show();
                 coordinates = new Location("default");
                 coordinates.setLatitude(43.600000);
                 coordinates.setLongitude(1.433333);

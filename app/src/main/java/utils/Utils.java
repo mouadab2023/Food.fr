@@ -22,7 +22,7 @@ public class Utils {
     public static String getPhoto(String photoName) {
         if (photoName != null && !photoName.isEmpty()) {
             return "https://places.googleapis.com/v1/" + photoName +
-                    "/media?maxWidthPx=1200&maxHeightPx=800&key=***REMOVED***CI-***REMOVED***";
+                    "/media?maxWidthPx=1200&maxHeightPx=800&key=***REMOVED***";
         }
         return "";
     }

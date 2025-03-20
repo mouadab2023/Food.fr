@@ -144,7 +144,7 @@ public class AddReviewActivity extends AppCompatActivity {
         Map<String, Object> review = new HashMap<>();
         review.put("username", userNameInput);
         review.put("description", descriptionInput);
-        review.put("note", (int) rating.getRating());
+        review.put("note", rating.getRating());
         review.put("restaurant", restaurantName);
         review.put("picture", imageUrl);
 
