@@ -10,9 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:background="@android:color/white">
 
-        <!-- Nom du client -->
         <TextView
             android:id="@+id/nomTextView"
             android:layout_width="wrap_content"
@@ -22,7 +22,6 @@
             android:textSize="20sp"
             android:textColor="@android:color/black" />
 
-        <!-- Restaurant réservé -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,7 +44,6 @@
                 android:textColor="@android:color/darker_gray" />
         </LinearLayout>
 
-        <!-- Date de réservation -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,7 +66,6 @@
                 android:textColor="@android:color/darker_gray" />
         </LinearLayout>
 
-        <!-- Nombre de personnes -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

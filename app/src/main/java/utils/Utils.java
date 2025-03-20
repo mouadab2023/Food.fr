@@ -24,7 +24,7 @@ public class Utils {
             return "https://places.googleapis.com/v1/" + photoName +
                     "/media?maxWidthPx=1200&maxHeightPx=800&key=***REMOVED***CI-***REMOVED***";
         }
-        return ""; // Return empty string if no photo is available
+        return "";
     }
 
 
@@ -32,7 +32,7 @@ public class Utils {
 
     public static void loadImage(ImageView imageView, String url) {
         if (url == null || url.isEmpty()) {
-            imageView.setImageResource(R.drawable.poke_bowl ); // Default image
+            imageView.setImageResource(R.drawable.poke_bowl );
             return;
         }
 

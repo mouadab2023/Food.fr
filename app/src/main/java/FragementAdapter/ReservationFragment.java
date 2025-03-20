@@ -53,17 +53,14 @@ public class ReservationFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_reservation, container, false);
 
-        // Initialisation des EditText pour la date, l'heure et le nombre de personnes
         etSelectedDate = view.findViewById(R.id.et_selected_date);
         etSelectedTime = view.findViewById(R.id.et_selected_time);
         etNumberOfPeople = view.findViewById(R.id.et_person_count);
         etName = view.findViewById(R.id.et_name);
         btnReserve = view.findViewById(R.id.btn_submit);
 
-        // Initialiser Firestore
         db = FirebaseFirestore.getInstance();
 
-        // Gestion du clic sur le champ de la date
         etSelectedDate.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
             int year = calendar.get(Calendar.YEAR);
@@ -73,14 +70,12 @@ public class ReservationFragment extends Fragment {
             DatePickerDialog datePickerDialog = new DatePickerDialog(
                     getContext(),
                     (view1, year1, month1, dayOfMonth) -> {
-                        // Formatage de la date et affichage dans le EditText
                         etSelectedDate.setText(dayOfMonth + "/" + (month1 + 1) + "/" + year1);
                     },
                     year, month, day);
             datePickerDialog.show();
         });
 
-        // Gestion du clic sur le champ de l'heure
         etSelectedTime.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
             int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -89,14 +84,12 @@ public class ReservationFragment extends Fragment {
             TimePickerDialog timePickerDialog = new TimePickerDialog(
                     getContext(),
                     (view12, hourOfDay, minute1) -> {
-                        // Formatage de l'heure et affichage dans le EditText
                         etSelectedTime.setText(hourOfDay + ":" + (minute1 < 10 ? "0" + minute1 : minute1));
                     },
                     hour, minute, true);
             timePickerDialog.show();
         });
 
-        // Lorsque le bouton "Réserver" est cliqué
         btnReserve.setOnClickListener(v -> {
             String date = etSelectedDate.getText().toString();
             String time = etSelectedTime.getText().toString();
@@ -108,12 +101,10 @@ public class ReservationFragment extends Fragment {
                 return;
             }
 
-            // Récupérer le nom du restaurant passé en argument
             assert getArguments() != null;
             Restaurant restaurant = (Restaurant) getArguments().getSerializable(ARG_RESTAURANT);
             String restaurantName = (restaurant != null) ? restaurant.getName() : "Nom du Restaurant";
 
-            // Créer une nouvelle réservation
 
 
             Map<String, Object> reservation = new HashMap<>();
@@ -122,16 +113,14 @@ public class ReservationFragment extends Fragment {
             reservation.put("Restaurant", restaurantName);
             reservation.put("Nombre", Integer.parseInt(numberOfPeople));
 
-            // Sauvegarder la réservation dans Firestore
-            db.collection("Reservation") // Accéder à la collection "reservations"
-                    .add(reservation) // Ajouter la réservation dans la collection
+            db.collection("Reservation")
+                    .add(reservation)
                     .addOnSuccessListener(documentReference -> {
 
                         Toast.makeText(getContext(), "Réservation réussie!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(requireContext(), ReservationActivity.class);
                         startActivity(intent);
 
-                        // Fermer l'activité actuelle
                         requireActivity().finish();
                     })
                     .addOnFailureListener(e -> {

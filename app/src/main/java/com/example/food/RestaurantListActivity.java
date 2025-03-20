@@ -43,10 +43,8 @@ public class RestaurantListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_restaurant_list);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        // Check if permission is granted
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // Request permission if not granted
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     LOCATION_PERMISSION_REQUEST_CODE);
@@ -68,7 +66,6 @@ public class RestaurantListActivity extends AppCompatActivity {
 
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, fetch location
                 getLastLocation();
             } else {
                 Toast.makeText(this, "Permission denied. Cannot access location.", Toast.LENGTH_LONG).show();
@@ -99,7 +96,7 @@ public class RestaurantListActivity extends AppCompatActivity {
 
         double latitude = coordinates.getLatitude();
         double longitude = coordinates.getLongitude();
-        double radius = 1500; // in meters
+        double radius = 1500;
         String includedType = "restaurant";
         int maxResultCount = 10;
 
