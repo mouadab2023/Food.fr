@@ -10,7 +10,7 @@ public interface GooglePlacesApi {
     //TODO remove api key from repo before making project public
     @Headers({
             "Content-Type: application/json",
-            "X-Goog-Api-Key: ***REMOVED***",
+            "X-Goog-Api-Key: Add your GOOGLE API HERE",
             "X-Goog-FieldMask: places.displayName,places.businessStatus,places.formattedAddress,places.photos.name,places.nationalPhoneNumber,places.rating,places.primaryType,places.location,places.editorialSummary"
     })
     @POST("v1/places:searchNearby")
