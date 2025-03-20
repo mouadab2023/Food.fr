@@ -50,4 +50,6 @@ dependencies {
 
     implementation("com.google.firebase:firebase-firestore:24.7.1")
     implementation("com.google.firebase:firebase-storage:20.2.1")
+
+    implementation("com.github.bumptech.glide:glide:4.15.1")
 }

@@ -15,7 +15,7 @@
         android:layout_marginTop="32dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Welcome to **********"
+        android:text="@string/welcome"
         android:textColor="@android:color/white"
         android:textSize="32sp" />
 
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:backgroundTint="@color/green"
-            android:text="Se Connecter"
+            android:text="@string/se_connecter"
             android:textColor="@android:color/white" />
 
         <Button
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:backgroundTint="@android:color/white"
-            android:text="Créer un Compte"
+            android:text="@string/créer_un_compte"
             android:textColor="@color/green" />
         <TextView
             android:id="@+id/guestLoginText"
