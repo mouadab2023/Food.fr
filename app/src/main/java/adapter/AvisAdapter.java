@@ -36,6 +36,10 @@ public class AvisAdapter extends RecyclerView.Adapter<AvisAdapter.AvisViewHolder
 
         if (avis.getPicture() != null && !avis.getPicture().isEmpty()) {
             Picasso.get().load(avis.getPicture()).into(holder.picture);
+            holder.picture.setVisibility(View.VISIBLE);
+        }
+        else{
+            holder.picture.setVisibility(View.GONE);
         }
     }
 

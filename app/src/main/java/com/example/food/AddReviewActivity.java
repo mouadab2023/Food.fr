@@ -34,7 +34,7 @@ public class AddReviewActivity extends AppCompatActivity {
     private Button submitButton, captureImageButton;
     private ImageView reviewImageView;
     private Uri imageUri = null;
-    private File imageFile;  // ✅ Declaring imageFile
+    private File imageFile;
 
     private FirebaseFirestore db;
     private FirebaseStorage storage;
@@ -57,7 +57,7 @@ public class AddReviewActivity extends AppCompatActivity {
         captureImageButton.setOnClickListener(view -> openCamera());
 
         submitButton.setOnClickListener(view -> {
-            submitButton.setEnabled(false); // 🔥 Disable button to prevent multiple clicks
+            submitButton.setEnabled(false);
 
             if (imageUri != null) {
                 uploadImageAndSaveReview();
@@ -101,7 +101,7 @@ public class AddReviewActivity extends AppCompatActivity {
     private void uploadImageAndSaveReview() {
         if (imageFile == null || !imageFile.exists()) {
             Toast.makeText(this, "No image file found!", Toast.LENGTH_SHORT).show();
-            submitButton.setEnabled(true); // ✅ Re-enable button if upload fails
+            submitButton.setEnabled(true);
             return;
         }
 
@@ -114,22 +114,36 @@ public class AddReviewActivity extends AppCompatActivity {
                 }))
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Image upload failed! " + e.getMessage(), Toast.LENGTH_LONG).show();
-                    submitButton.setEnabled(true); // ✅ Re-enable button if upload fails
+                    submitButton.setEnabled(true);
                 });
     }
 
     private void saveReview(String imageUrl) {
         String restaurantName = getIntent().getStringExtra("restaurant_name");
+        String userNameInput = username.getText().toString().trim();
+        String descriptionInput = description.getText().toString().trim();
+
+        if (userNameInput.isEmpty()) {
+            Toast.makeText(this, "Please enter your name.", Toast.LENGTH_SHORT).show();
+            submitButton.setEnabled(true);
+            return;
+        }
+
+        if (descriptionInput.isEmpty()) {
+            Toast.makeText(this, "Please enter a description.", Toast.LENGTH_SHORT).show();
+            submitButton.setEnabled(true);
+            return;
+        }
 
         if (restaurantName == null || restaurantName.isEmpty()) {
             Toast.makeText(this, "Error: Restaurant name is missing!", Toast.LENGTH_SHORT).show();
-            submitButton.setEnabled(true); // ✅ Re-enable button if error
+            submitButton.setEnabled(true);
             return;
         }
 
         Map<String, Object> review = new HashMap<>();
-        review.put("username", username.getText().toString());
-        review.put("description", description.getText().toString());
+        review.put("username", userNameInput);
+        review.put("description", descriptionInput);
         review.put("note", (int) rating.getRating());
         review.put("restaurant", restaurantName);
         review.put("picture", imageUrl);
@@ -137,11 +151,12 @@ public class AddReviewActivity extends AppCompatActivity {
         db.collection("Reviews").add(review)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(this, "Review added!", Toast.LENGTH_SHORT).show();
-                    finish();  // ✅ Close activity after successful submission
+                    finish();
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Failed to add review!", Toast.LENGTH_SHORT).show();
-                    submitButton.setEnabled(true); // ✅ Re-enable button if Firestore fails
+                    submitButton.setEnabled(true);
                 });
     }
+
 }

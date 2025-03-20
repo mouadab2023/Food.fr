@@ -19,6 +19,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.Comparator;
 import java.util.List;
 
 import adapter.PlaceAdapter;
@@ -27,6 +28,7 @@ import model.api.response.PlaceResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import utils.Utils;
 
 public class RestaurantListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -41,10 +43,8 @@ public class RestaurantListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_restaurant_list);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        // Check if permission is granted
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // Request permission if not granted
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     LOCATION_PERMISSION_REQUEST_CODE);
@@ -66,7 +66,6 @@ public class RestaurantListActivity extends AppCompatActivity {
 
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, fetch location
                 getLastLocation();
             } else {
                 Toast.makeText(this, "Permission denied. Cannot access location.", Toast.LENGTH_LONG).show();
@@ -97,7 +96,7 @@ public class RestaurantListActivity extends AppCompatActivity {
 
         double latitude = coordinates.getLatitude();
         double longitude = coordinates.getLongitude();
-        double radius = 1500; // in meters
+        double radius = 1500;
         String includedType = "restaurant";
         int maxResultCount = 10;
 
@@ -113,6 +112,7 @@ public class RestaurantListActivity extends AppCompatActivity {
                         if (response.isSuccessful() && response.body() != null && response.body().getPlaces() != null) {
                             List<PlaceResponse.Place> places = response.body().getPlaces();
                             if (!places.isEmpty()) {
+                                places.sort(Comparator.comparingDouble(RestaurantListActivity.this::calculateDistance));
                                 PlaceAdapter placeAdapter = new PlaceAdapter(RestaurantListActivity.this, places);
                                 recyclerView.setAdapter(placeAdapter);
                             } else {
@@ -123,5 +123,14 @@ public class RestaurantListActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private double calculateDistance(PlaceResponse.Place place) {
+        return Utils.haversine(
+                coordinates.getLatitude(),
+                coordinates.getLongitude(),
+                place.getLocation().getLatitude(),
+                place.getLocation().getLongitude()
+        );
     }
 }

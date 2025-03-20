@@ -8,7 +8,6 @@ public class Reservation {
     private int nombrePersonne;
     private String nom;
 
-    // Constructeur vide pour Firestore
     public Reservation() {}
 
     @PropertyName("Date")

@@ -3,5 +3,8 @@
     <string name="guest_login_text"><u>continuer comme invité</u></string>
     <string name="no_description_available">No description available</string>
     <string name="default_notification_channel_id">default_channel</string>
+    <string name="welcome">Welcome to Food.fr</string>
+    <string name="se_connecter">Se Connecter</string>
+    <string name="créer_un_compte">Créer un Compte</string>
 
 </resources>

@@ -2,18 +2,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@android:color/white">
 
-    <!-- ✅ Make sure this button exists! -->
     <Button
         android:id="@+id/addReviewButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add a Review"
-        android:backgroundTint="@android:color/holo_blue_dark"
+        android:backgroundTint="#385E3C"
         android:textColor="@android:color/white"
         android:padding="12dp"
-        android:textSize="18sp"/>
+        android:textSize="18sp"
+/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reviewsRecyclerView"

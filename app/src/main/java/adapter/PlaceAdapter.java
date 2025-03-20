@@ -47,11 +47,15 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.PlaceViewHol
         holder.typeText.setText(place.getPrimaryType().replace('_', ' '));
         holder.distanceText.setText(calculateDistance(place));
 
-        final var photoUrl = Utils.getPhoto(place.getPhotos(), place.getDisplayName().getText());
-        Utils.loadImage(holder.imageView, photoUrl);
+        final var photoName = place.getPhotos() != null && !place.getPhotos().isEmpty()
+                ? place.getPhotos().get(0).getName()
+                : null;
 
+        final var photoUrl = Utils.getPhoto(photoName);
+        Utils.loadImage(holder.imageView, photoUrl);
         holder.itemView.setOnClickListener(v -> openRestaurantDetails(v, place, photoUrl));
     }
+
 
     private String calculateDistance(PlaceResponse.Place place) {
         double distance = Utils.haversine(

@@ -2,7 +2,6 @@ package com.example.food;
 
 import android.os.Bundle;
 import android.util.Log;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,10 +44,8 @@ public class ReservationActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         reservationList.clear();
                         for (DocumentSnapshot document : task.getResult()) {
-                            // Afficher les données récupérées pour déboguer
                             Log.d("Firestore", "Document ID: " + document.getId());
                             Log.d("Firestore", "Data: " + document.getData());
-
                             Reservation reservation = document.toObject(Reservation.class);
 
                             if (reservation != null) {

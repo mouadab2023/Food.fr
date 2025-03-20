@@ -74,7 +74,7 @@ public class ReviewsFragment extends Fragment {
     private void loadAvis(String restaurantName) {
         db.collection("Reviews")
                 .whereEqualTo("restaurant", restaurantName)
-                .addSnapshotListener((value, error) -> {  // 🔥 REAL-TIME LISTENER
+                .addSnapshotListener((value, error) -> {
                     if (error != null) {
                         Toast.makeText(getContext(), "Error loading reviews", Toast.LENGTH_SHORT).show();
                         return;
@@ -83,7 +83,7 @@ public class ReviewsFragment extends Fragment {
                     for (DocumentSnapshot doc : value.getDocuments()) {
                         avisList.add(doc.toObject(Avis.class));
                     }
-                    avisAdapter.notifyDataSetChanged(); // Refresh RecyclerView instantly
+                    avisAdapter.notifyDataSetChanged();
                 });
     }
 }
