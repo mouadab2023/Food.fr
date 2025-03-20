@@ -4,11 +4,9 @@ package utils;
 import android.widget.ImageView;
 
 import com.example.food.R;
-import com.squareup.picasso.Picasso;
-
-import java.util.List;
-
-import model.api.response.PlaceResponse;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 
 public class Utils {
     public static double haversine(double lat1, double lon1, double lat2, double lon2) {
@@ -21,22 +19,30 @@ public class Utils {
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return R * c;
     }
-    public static String getPhoto(List<PlaceResponse.Place.Photo> photoList,String name){
-        for (final var p :photoList) {
-            for(final var authorAttribution:p.getAuthorAttributions()){
-                if(authorAttribution.getDisplayName().equals(name)){
-                    return authorAttribution.getPhotoUri();
-                }
-            }
+    public static String getPhoto(String photoName) {
+        if (photoName != null && !photoName.isEmpty()) {
+            return "https://places.googleapis.com/v1/" + photoName +
+                    "/media?maxWidthPx=1200&maxHeightPx=800&key=AIzaSyCI-HGW84mUIVgRJaA_MqqzwGOsesMyPsA";
         }
-        return "";
+        return ""; // Return empty string if no photo is available
     }
 
-    public static void loadImage(ImageView imageView, String photoUrl) {
-        if (!photoUrl.isEmpty()) {
-            Picasso.get().load(photoUrl).resize(200, 100).into(imageView);
-        } else {
-            Picasso.get().load(R.drawable.poke_bowl).into(imageView);
+
+
+
+    public static void loadImage(ImageView imageView, String url) {
+        if (url == null || url.isEmpty()) {
+            imageView.setImageResource(R.drawable.poke_bowl ); // Default image
+            return;
         }
+
+        Glide.with(imageView.getContext())
+                .load(url)
+                .apply(new RequestOptions()
+                        .override(600, 400)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .placeholder(R.drawable.loading)
+                        .error(R.drawable.poke_bowl))
+                .into(imageView);
     }
 }
